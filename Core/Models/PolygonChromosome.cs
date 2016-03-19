@@ -14,7 +14,7 @@ namespace GenArt.Core.Models
     public static int Height { get; set; }
     public static int Width { get; set; }
 
-    public DrawingChromosome(int length) : base(length)
+    public DrawingChromosome() : base(10)
     {
     }
 
@@ -30,7 +30,8 @@ namespace GenArt.Core.Models
       using (var ms = new MemoryStream())
       {
         p.WriteTo(new CodedOutputStream(ms));
-        return new Gene(ms);
+        var g = new Gene(ms);
+        return g;
       }
     }
 
@@ -61,7 +62,7 @@ namespace GenArt.Core.Models
 
     public override IChromosome CreateNew()
     {
-      throw new System.NotImplementedException();
+      return new DrawingChromosome();
     }
   }
 }
