@@ -8,13 +8,13 @@ using Google.Protobuf;
 
 namespace GenArt.Core.Models
 {
-  public class DrawingChromosome : ChromosomeBase
+  public class PolygonChromosome : ChromosomeBase
   {
     public static int MaxPoints { get; set; }
     public static int Height { get; set; }
     public static int Width { get; set; }
 
-    public DrawingChromosome() : base(10)
+    public PolygonChromosome() : base(10)
     {
     }
 
@@ -37,11 +37,13 @@ namespace GenArt.Core.Models
 
     private PointData RandomPoint()
     {
-      return new PointData()
-      {
-        X = Tools.GetRandomNumber(0, Height-1),
-        Y = Tools.GetRandomNumber(0, Width-1)
-      };
+      var point = new PointData();
+      var randomX = Tools.GetRandomNumber(0, Tools.MaxWidth);
+      var randomY = Tools.GetRandomNumber(0, Tools.MaxHeight);
+      point.X = Math.Min(Math.Max(0, randomX + Tools.GetRandomNumber(-3, 3)), Tools.MaxWidth);
+      point.Y = Math.Min(Math.Max(0, randomY + Tools.GetRandomNumber(-3, 3)), Tools.MaxHeight);
+
+      return point;
     }
 
     private int RandomPointCount()
@@ -62,7 +64,7 @@ namespace GenArt.Core.Models
 
     public override IChromosome CreateNew()
     {
-      return new DrawingChromosome();
+      return new PolygonChromosome();
     }
   }
 }

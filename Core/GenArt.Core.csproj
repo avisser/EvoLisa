@@ -106,7 +106,7 @@
     <Compile Include="Classes\Settings.cs" />
     <Compile Include="Classes\Tools.cs" />
     <Compile Include="Models\Drawing.cs" />
-    <Compile Include="Models\DrawingChromosome.cs" />
+    <Compile Include="Models\PolygonChromosome.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
