@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using Amib.Threading;
 using GenArt.AST;
+using GenArt.Core.Models;
 
 namespace GenArt.Classes
 {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using GenArt.AST;
 
@@ -21,7 +22,15 @@ namespace GenArt.Classes
       var brush = GetGdiBrush(polygon.Brush);
 
       var points = GetGdiPoints(polygon.Points, scale);
-      g.FillPolygon(brush, points); //(brush, points);
+      try
+      {
+        g.FillPolygon(brush, points); //(brush, points);
+      }
+      catch (Exception e)
+      {
+        int i = 0;
+        i++;
+      }
     }
 
     //Convert a list of DnaPoint to a list of System.Drawing.Point's

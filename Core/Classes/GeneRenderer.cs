@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using GenArt.AST;
+using GenArt.Core.Models;
 
 namespace GenArt.Classes
 {

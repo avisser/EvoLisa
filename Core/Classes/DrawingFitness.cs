@@ -23,7 +23,16 @@ namespace GenArt.Core.Classes
     public double Evaluate(IChromosome chromosome)
     {
       var polyChrome = chromosome as PolygonChromosome;
-      return FitnessCalculator.GetGeneFitness(polyChrome.GetPolygons(), _sourceColors);
+      try
+      {
+        return FitnessCalculator.GetGeneFitness(polyChrome.GetPolygons(), _sourceColors);
+      }
+      catch
+      {
+        
+      }
+
+      return 0;
     }
   }
 }

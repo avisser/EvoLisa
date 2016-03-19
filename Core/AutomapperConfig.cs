@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using AutoMapper;
 using GenArt.AST;
+using GenArt.Core.Models;
 
 namespace GenArt.Core
 {

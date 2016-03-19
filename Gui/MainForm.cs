@@ -66,8 +66,8 @@ namespace GenArt
 
       var selection = new EliteSelection();
       var crossover = new OnePointCrossover(0);
-//      var mutation = new CustomMutation();
-      var mutation = new UniformMutation(true);
+      var mutation = new CustomMutation();
+//      var mutation = new UniformMutation(true);
       var fitness = new DrawingFitness(sourceColors);
       var chromosome = new PolygonChromosome();
       var population = new Population(5, 50, chromosome);

@@ -86,10 +86,14 @@ namespace GenArt.Core.Models
     {
       foreach (var polygon in GetPolygons())
       {
-        if (Tools.GetRandomNumber(0, 1000) > probability*1000)
-        {
-          polygon.Mutate(probability);
-        }
+        if (Tools.WillMutate(Settings.ActiveAddPointMutationRate))
+          polygon.AddPoint();
+
+        if (Tools.WillMutate(Settings.ActiveRemovePointMutationRate))
+          polygon.RemovePoint();
+
+        polygon.Brush.Mutate();
+        polygon.Points.ForEach(p => p.Mutate());
       }
     }
 
