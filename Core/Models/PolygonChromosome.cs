@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using GenArt.Classes;
 using GeneticSharp.Domain.Chromosomes;
@@ -32,21 +33,21 @@ namespace GenArt.Core.Models
         p.Points.Add(RandomPoint());
       }
 
-      var g = new Gene(p.ToByteArray());
+      var g = new Gene(p);
       return g;
     }
 
-    public List<Polygon> GetPolygons()
-    {
-      var polygons = new List<Polygon>();
-      var genes = GetGenes();
-      for (int i = 0; i < _activeGenes; i++)
-      {
-        var ms = new MemoryStream(genes[i].Value as byte[]);
-        polygons.Add(Polygon.Parser.ParseFrom(ms));
-      }
-      return polygons;
-    }
+//    public List<Polygon> GetPolygons()
+//    {
+//      var polygons = new List<Polygon>();
+//      var genes = GetGenes();
+//      for (int i = 0; i < _activeGenes; i++)
+//      {
+//        var ms = new MemoryStream(genes[i].Value as byte[]);
+//        polygons.Add(Polygon.Parser.ParseFrom(ms));
+//      }
+//      return polygons;
+//    }
 
     private PointData RandomPoint()
     {
@@ -86,6 +87,11 @@ namespace GenArt.Core.Models
       {
 //        polygon.
       }
+    }
+
+    public IEnumerable<Polygon> GetPolygons()
+    {
+      return GetGenes().Select(g => g.Value as Polygon);
     }
   }
 }

@@ -7,7 +7,7 @@ namespace GenArt.Classes
   public static class GeneRenderer
   {
     //Render a Drawing
-    public static void Render(List<Polygon> polygons, Graphics g, int scale)
+    public static void Render(IEnumerable<Polygon> polygons, Graphics g, int scale)
     {
       g.Clear(Color.Black);
 

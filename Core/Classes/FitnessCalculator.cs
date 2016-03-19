@@ -40,7 +40,7 @@ namespace GenArt.Classes
             return error;
         }
 
-      public static double GetGeneFitness(List<Polygon> polygons, Color[,] sourceColors)
+      public static double GetGeneFitness(IEnumerable<Polygon> polygons, Color[,] sourceColors)
         {
             double error = 0;
 
