@@ -22,5 +22,10 @@ namespace GenArt.Classes
                 return true;
             return false;
         }
+
+      public static bool Doit(float probability)
+      {
+        return GetRandomNumber(0, 1000) > probability*1000;
+      }
     }
 }

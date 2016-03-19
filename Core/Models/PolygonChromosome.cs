@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using GenArt.Classes;
+using GenArt.Core.Classes;
 using GeneticSharp.Domain.Chromosomes;
 using Google.Protobuf;
 
@@ -14,7 +15,7 @@ namespace GenArt.Core.Models
   public class PolygonChromosome : ChromosomeBase
   {
     private int _activeGenes;
-    const int LENGTH = 50;
+    const int LENGTH = 25;
     public PolygonChromosome() :base(LENGTH)
     {
       _activeGenes = Tools.GetRandomNumber(2, LENGTH);
@@ -49,7 +50,7 @@ namespace GenArt.Core.Models
 //      return polygons;
 //    }
 
-    private PointData RandomPoint()
+    public static PointData RandomPoint()
     {
       var point = new PointData();
       var randomX = Tools.GetRandomNumber(0, Tools.MaxWidth);
@@ -85,7 +86,10 @@ namespace GenArt.Core.Models
     {
       foreach (var polygon in GetPolygons())
       {
-//        polygon.
+        if (Tools.GetRandomNumber(0, 1000) > probability*1000)
+        {
+          polygon.Mutate(probability);
+        }
       }
     }
 

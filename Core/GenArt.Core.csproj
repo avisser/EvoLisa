@@ -111,6 +111,7 @@
     <Compile Include="Classes\FileUtil.cs" />
     <Compile Include="Classes\FitnessCalculator.cs" />
     <Compile Include="Classes\DnaRenderer.cs" />
+    <Compile Include="Classes\MutationExtensions.cs" />
     <Compile Include="Classes\Serializer.cs" />
     <Compile Include="Classes\Settings.cs" />
     <Compile Include="Classes\Tools.cs" />
