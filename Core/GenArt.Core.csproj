@@ -56,6 +56,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="GeneticSharp.Domain, Version=1.0.5894.2743, Culture=neutral, PublicKeyToken=d63d2a65268366c6, processorArchitecture=MSIL">
       <HintPath>..\packages\GeneticSharp.1.0.100\lib\net35\GeneticSharp.Domain.dll</HintPath>
       <Private>True</Private>
@@ -80,6 +84,7 @@
       <HintPath>..\packages\GeneticSharp.1.0.100\lib\net35\HelperSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="NCalc, Version=1.3.8.0, Culture=neutral, PublicKeyToken=973cde3f1cafed03, processorArchitecture=MSIL">
       <HintPath>..\packages\GeneticSharp.1.0.100\lib\net35\NCalc.dll</HintPath>
       <Private>True</Private>
@@ -99,9 +104,13 @@
     <Compile Include="AST\DnaDrawing.cs" />
     <Compile Include="AST\DnaPoint.cs" />
     <Compile Include="AST\DnaPolygon.cs" />
+    <Compile Include="AutomapperConfig.cs" />
+    <Compile Include="Classes\CustomMutation.cs" />
+    <Compile Include="Classes\GeneRenderer.cs" />
+    <Compile Include="Classes\DrawingFitness.cs" />
     <Compile Include="Classes\FileUtil.cs" />
     <Compile Include="Classes\FitnessCalculator.cs" />
-    <Compile Include="Classes\Renderer.cs" />
+    <Compile Include="Classes\DnaRenderer.cs" />
     <Compile Include="Classes\Serializer.cs" />
     <Compile Include="Classes\Settings.cs" />
     <Compile Include="Classes\Tools.cs" />

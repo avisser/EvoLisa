@@ -4,19 +4,19 @@ using GenArt.AST;
 
 namespace GenArt.Classes
 {
-  public static class Renderer
+  public static class GeneRenderer
   {
     //Render a Drawing
-    public static void Render(DnaDrawing drawing, Graphics g, int scale)
+    public static void Render(List<Polygon> polygons, Graphics g, int scale)
     {
       g.Clear(Color.Black);
 
-      foreach (DnaPolygon polygon in drawing.Polygons)
+      foreach (Polygon polygon in polygons)
         Render(polygon, g, scale);
     }
 
     //Render a polygon
-    private static void Render(DnaPolygon polygon, Graphics g, int scale)
+    private static void Render(Polygon polygon, Graphics g, int scale)
     {
       var brush = GetGdiBrush(polygon.Brush);
 
@@ -25,7 +25,7 @@ namespace GenArt.Classes
     }
 
     //Convert a list of DnaPoint to a list of System.Drawing.Point's
-    private static Point[] GetGdiPoints(IList<DnaPoint> points, int scale)
+    private static Point[] GetGdiPoints(IList<PointData> points, int scale)
     {
       var pts = new Point[points.Count];
       int i = 0;
@@ -40,7 +40,7 @@ namespace GenArt.Classes
     }
 
     //Convert a DnaBrush to a System.Drawing.Brush
-    private static System.Drawing.Brush GetGdiBrush(DnaBrush b)
+    private static System.Drawing.Brush GetGdiBrush(BrushData b)
     {
       return new SolidBrush(Color.FromArgb(b.Alpha, b.Red, b.Green, b.Blue));
     }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -10,12 +12,15 @@ namespace GenArt.Core.Models
 {
   public class PolygonChromosome : ChromosomeBase
   {
-    public static int MaxPoints { get; set; }
-    public static int Height { get; set; }
-    public static int Width { get; set; }
-
-    public PolygonChromosome() : base(10)
+    private int _activeGenes;
+    const int LENGTH = 50;
+    public PolygonChromosome() :base(LENGTH)
     {
+      _activeGenes = Tools.GetRandomNumber(2, LENGTH);
+      for (int i = 0; i < LENGTH; i++)
+      {
+        ReplaceGene(i, GenerateGene(i));
+      }
     }
 
     public override Gene GenerateGene(int geneIndex)
@@ -27,12 +32,20 @@ namespace GenArt.Core.Models
         p.Points.Add(RandomPoint());
       }
 
-      using (var ms = new MemoryStream())
+      var g = new Gene(p.ToByteArray());
+      return g;
+    }
+
+    public List<Polygon> GetPolygons()
+    {
+      var polygons = new List<Polygon>();
+      var genes = GetGenes();
+      for (int i = 0; i < _activeGenes; i++)
       {
-        p.WriteTo(new CodedOutputStream(ms));
-        var g = new Gene(ms);
-        return g;
+        var ms = new MemoryStream(genes[i].Value as byte[]);
+        polygons.Add(Polygon.Parser.ParseFrom(ms));
       }
+      return polygons;
     }
 
     private PointData RandomPoint()
@@ -51,7 +64,7 @@ namespace GenArt.Core.Models
       return Tools.GetRandomNumber(3, 10);
     }
 
-    private BrushData RandomBrush()
+    public static BrushData RandomBrush()
     {
       return new BrushData()
       {
@@ -65,6 +78,14 @@ namespace GenArt.Core.Models
     public override IChromosome CreateNew()
     {
       return new PolygonChromosome();
+    }
+
+    public void Mutate(float probability)
+    {
+      foreach (var polygon in GetPolygons())
+      {
+//        polygon.
+      }
     }
   }
 }

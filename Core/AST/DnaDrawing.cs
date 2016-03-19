@@ -2,13 +2,30 @@
 using System.Xml.Serialization;
 using GenArt.Classes;
 using System;
+using System.Linq;
+using AutoMapper;
+using GenArt.Core.Models;
 
 namespace GenArt.AST
 {
     [Serializable]
     public class DnaDrawing
     {
-        public List<DnaPolygon> Polygons { get; set; }
+      public DnaDrawing()
+      {
+      }
+
+      public DnaDrawing(PolygonChromosome best)
+      {
+        Polygons = best.GetPolygons().Select(p => new DnaPolygon()
+        {
+          Brush = Mapper.Map<DnaBrush>(p.Brush),
+          Points = Mapper.Map<List<DnaPoint>>(p.Points)
+        })
+          .ToList();
+      }
+
+      public List<DnaPolygon> Polygons { get; set; }
 
         [XmlIgnore]
         public bool IsDirty { get; private set; }
