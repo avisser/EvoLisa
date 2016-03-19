@@ -72,7 +72,7 @@ namespace GenArt
       var chromosome = new PolygonChromosome();
       var population = new Population(5, 50, chromosome);
       _ga = new GeneticAlgorithm(population, fitness, selection, crossover, mutation);
-      _ga.Termination = new GenerationNumberTermination(10000);
+      _ga.Termination = new TimeEvolvingTermination(TimeSpan.FromHours(4));
 //
       _ga.GenerationRan += (sender, args) =>
       {
