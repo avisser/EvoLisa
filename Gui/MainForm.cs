@@ -65,8 +65,9 @@ namespace GenArt
       lastSelected = 0;
 
       var selection = new EliteSelection();
-      var crossover = new OnePointCrossover(25);
-      var mutation = new CustomMutation();
+      var crossover = new OnePointCrossover(0);
+//      var mutation = new CustomMutation();
+      var mutation = new UniformMutation(true);
       var fitness = new DrawingFitness(sourceColors);
       var chromosome = new PolygonChromosome();
       var population = new Population(5, 50, chromosome);
@@ -78,13 +79,12 @@ namespace GenArt
         generation++;
         var best = _ga.BestChromosome as PolygonChromosome;
         var drawing = new DnaDrawing(best);
+        errorLevel = best.Fitness.Value;
 
         lock (currentDrawing)
         {
           currentDrawing = drawing;
         }
-
-        Redraw();
       };
       _ga.Stopped += (sender, args) =>
       {
@@ -154,6 +154,7 @@ namespace GenArt
 
     private void Start()
     {
+      repaintIntervall = TimeSpan.FromSeconds(1);
       btnStart.Text = "Stop";
       isRunning = true;
       tmrRedraw.Enabled = true;
