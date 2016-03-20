@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using GenArt.AST;
@@ -65,26 +66,34 @@ namespace GenArt
       lastSelected = 0;
 
       var selection = new EliteSelection();
-      var crossover = new OnePointCrossover(0);
+//      var selection = new CustomSelection(20);
+      var crossover = new OrderedCrossover();
+//      var crossover = new CycleCrossover();
+//      var crossover = new CutAndSpliceCrossover();
+//      var crossover = new OnePointCrossover(2);
       var mutation = new CustomMutation();
 //      var mutation = new UniformMutation(true);
       var fitness = new DrawingFitness(sourceColors);
       var chromosome = new PolygonChromosome();
-      var population = new Population(5, 50, chromosome);
+      var population = new Population(10, 100, chromosome);
       _ga = new GeneticAlgorithm(population, fitness, selection, crossover, mutation);
       _ga.Termination = new TimeEvolvingTermination(TimeSpan.FromHours(4));
-//
+//      
       _ga.GenerationRan += (sender, args) =>
       {
         generation++;
-        var best = _ga.BestChromosome as PolygonChromosome;
+        var best = _ga.Population.CurrentGeneration.Chromosomes.OrderBy(c => c.Fitness).First() as PolygonChromosome;
         var drawing = new DnaDrawing(best);
-        errorLevel = best.Fitness.Value;
-
-        lock (currentDrawing)
+        if (best.Fitness.Value <= errorLevel)
         {
-          currentDrawing = drawing;
+          errorLevel = best.Fitness.Value;
+          lock (currentDrawing)
+          {
+            currentDrawing = drawing;
+          }
+          selected++;
         }
+
       };
       _ga.Stopped += (sender, args) =>
       {

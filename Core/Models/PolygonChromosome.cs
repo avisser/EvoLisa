@@ -18,7 +18,7 @@ namespace GenArt.Core.Models
     const int LENGTH = 25;
     public PolygonChromosome() :base(LENGTH)
     {
-      _activeGenes = Tools.GetRandomNumber(2, LENGTH);
+      _activeGenes = Tools.GetRandomNumber(2, LENGTH/2);
       for (int i = 0; i < LENGTH; i++)
       {
         ReplaceGene(i, GenerateGene(i));
@@ -63,6 +63,7 @@ namespace GenArt.Core.Models
 
     private int RandomPointCount()
     {
+      return 4;
       return Tools.GetRandomNumber(3, 10);
     }
 
@@ -82,8 +83,17 @@ namespace GenArt.Core.Models
       return new PolygonChromosome();
     }
 
-    public void Mutate(float probability)
+    public void Mutate()
     {
+      if (Tools.WillMutate(Settings.ActiveAddPolygonMutationRate))
+        _activeGenes++;
+
+      if (Tools.WillMutate(Settings.ActiveRemovePolygonMutationRate))
+        _activeGenes--;
+
+//      if (Tools.WillMutate(Settings.ActiveMovePolygonMutationRate))
+//        MovePolygon();
+
       foreach (var polygon in GetPolygons())
       {
         if (Tools.WillMutate(Settings.ActiveAddPointMutationRate))
@@ -99,7 +109,7 @@ namespace GenArt.Core.Models
 
     public IEnumerable<Polygon> GetPolygons()
     {
-      return GetGenes().Select(g => g.Value as Polygon);
+      return GetGenes().Take(_activeGenes).Select(g => g.Value as Polygon);
     }
   }
 }

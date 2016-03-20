@@ -106,6 +106,7 @@
     <Compile Include="AST\DnaPolygon.cs" />
     <Compile Include="AutomapperConfig.cs" />
     <Compile Include="Classes\CustomMutation.cs" />
+    <Compile Include="Classes\CustomSelection.cs" />
     <Compile Include="Classes\GeneRenderer.cs" />
     <Compile Include="Classes\DrawingFitness.cs" />
     <Compile Include="Classes\FileUtil.cs" />

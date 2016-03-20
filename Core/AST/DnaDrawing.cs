@@ -27,8 +27,8 @@ namespace GenArt.AST
 
       public List<DnaPolygon> Polygons { get; set; }
 
-        [XmlIgnore]
-        public bool IsDirty { get; private set; }
+//        [XmlIgnore]
+//        public bool IsDirty { get; private set; }
 
         public int PointCount
         {
@@ -44,7 +44,7 @@ namespace GenArt.AST
 
         public void SetDirty()
         {
-            IsDirty = true;
+//            IsDirty = true;
         }
 
         public void Init()

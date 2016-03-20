@@ -10,7 +10,7 @@ namespace GenArt.Core.Classes
     protected override void PerformMutate(IChromosome chromosome, float probability)
     {
       var poly = chromosome as PolygonChromosome;
-      poly.Mutate(probability);
+      poly.Mutate();
     }
   }
 }
